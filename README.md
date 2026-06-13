@@ -32,11 +32,15 @@ The project utilizes KiCad's integrated `ngspice` engine. The simulation is conf
 ---
 
 ## 🚀 How to Run the Simulation
-1. Open the `.kicad_pro` project file in the KiCad Project Manager.
-2. Open the Schematic Editor to view the circuit layout.
-3. Go to **Inspect > Simulator** in the top menu.
-4. Click the **Run/Stop Simulation** (Play) button.
-5. Probe the Gate and Drain nets on the schematic to view the resulting logic waveforms in the simulator window.
+1. Clone this repository to your local machine:
+   ```bash
+   git clone [https://github.com/satvikpandurangi/MOSFET-As-Switch-Kicad-Simulation.git](https://github.com/satvikpandurangi/MOSFET-As-Switch-Kicad-Simulation.git)
+   ```
+2. Open the `.kicad_pro` project file in the KiCad Project Manager.
+3. Open the Schematic Editor to view the circuit layout.
+4. Go to **Inspect > Simulator** in the top menu.
+5. Click the **Run/Stop Simulation** (Play) button.
+6. Probe the Gate and Drain nets on the schematic to view the resulting logic waveforms in the simulator window.
 
 ---
 
