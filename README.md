@@ -1,52 +1,81 @@
 # MOSFET as a Switch: KiCad SPICE Simulation
 
-## 📌 Overview
-This repository contains a fully functional KiCad schematic and SPICE simulation demonstrating how an N-Channel MOSFET operates as an electronic switch. It visualizes the transition between the cut-off (OFF) and saturation (ON) regions using an integrated transient analysis.
+## Overview
 
-This project is ideal for students and hobbyists looking to understand basic solid-state switching, load control, and how to configure internal SPICE models within the KiCad EDA environment.
+This repository contains a KiCad schematic and SPICE simulation demonstrating how an N-Channel Enhancement MOSFET operates as a voltage-controlled electronic switch. Using transient analysis in KiCad's integrated `ngspice` engine, the project verifies the device's behavior across its cut-off and saturation regions while driving a resistive load.
 
----
+## Features
 
-## ⚙️ Circuit Architecture
-* **Active Component:** N-Channel MOSFET
-* **Load:** Standard resistive load connected to the Drain.
-* **Control Signal:** A high-frequency Pulse Voltage Source applied to the Gate.
-* **Power Supply:** DC Voltage Source across the Drain-Source path.
+- Complete KiCad schematic of a MOSFET switching circuit
+- Transient SPICE simulation (`.tran`) over a 20 ms window
+- Clear visualization of the inverse relationship between gate control signal and drain output
+- Tabulated input/output logic states for quick reference
 
----
+## Circuit Description
 
-## 📊 Simulation Details
-The project utilizes KiCad's integrated `ngspice` engine. The simulation is configured for a **Transient Analysis** to plot the time-domain waveforms. 
+The circuit uses a Pulse Voltage Source on the Gate to switch the MOSFET between cut-off (OFF) and saturation (ON):
 
-**Key Observations:**
-* **Gate Voltage ($V_{GS}$):** The input digital control pulse.
-* **Drain Voltage ($V_{DS}$):** Drops to near 0V when the MOSFET conducts (switch closed), and rises to the supply voltage when the MOSFET blocks current (switch open).
-* **Drain Current ($I_D$):** Demonstrates the flow of current through the load when the threshold voltage ($V_{TH}$) is exceeded.
+- **Cut-off (Switch OFF):** When V_GS < V_th, the Drain–Source channel is open and no current flows through the load.
+- **Saturation (Switch ON):** When V_GS > V_th (logic HIGH), the channel becomes conductive, pulling current from the 12 V supply through the load to ground.
 
----
+## Components
 
-## 🛠️ Software Requirements
-* **KiCad EDA** (v6.0 or higher recommended)
-* Integrated `ngspice` simulator (included by default in KiCad)
+| Type | Component | Value / Rating |
+|------|-----------|-----------------|
+| Active | N-Channel Enhancement MOSFET (VDMOS) | — |
+| Passive | Resistor (Load) | 1 kΩ |
+| Source | DC Voltage Source (Main Power) | 12 V |
+| Source | Pulse Voltage Source (Gate Control) | 0–5 V, 10 ms period |
+| Misc | Ground terminals | — |
 
----
+## Simulation Setup
 
-## 🚀 How to Run the Simulation
-1. Clone this repository to your local machine:
+1. The 12 V DC source powers the Drain through the 1 kΩ load resistor.
+2. The MOSFET's Source is tied to Ground.
+3. A 0–5 V square-wave Pulse Source (10 ms period) drives the Gate.
+4. Transient analysis is run as `.tran 0.1m 20m` over a 20 ms window.
+5. Gate voltage (input) and Drain voltage (output) nets are probed to observe switching behavior.
+
+## Results
+
+| Gate Voltage (V_GS) | Input Logic | MOSFET State | Drain Voltage (V_Drain) | Load Status |
+|----------------------|-------------|----------------|--------------------------|------------------------|
+| 0.0 V | LOW (0) | OFF (Cut-off) | ~12.0 V | Unpowered (no current) |
+| 5.0 V | HIGH (1) | ON (Conducting) | ~0.0 V | Powered (current flowing) |
+
+The transient simulation confirms the MOSFET acts as a reliable voltage-controlled switch: a HIGH gate signal pulls the Drain voltage to near 0 V (switch closed), while a LOW gate signal leaves the Drain at the full 12 V supply (switch open).
+
+## Repository Structure
+
+```
+.
+├── MOSFET_As_Switch.kicad_pro   # Main KiCad project file
+├── MOSFET_As_Switch.kicad_sch   # Schematic and SPICE directives
+├── MOSFET_As_Switch.kicad_pcb   # PCB layout file
+├── MOSFET_Schematic.png         # Circuit schematic
+├── MOSFET_Output.png            # Simulation waveform output
+└── README.md
+```
+
+## How to Run
+
+1. Clone this repository:
    ```bash
-   git clone [https://github.com/satvikpandurangi/MOSFET-As-Switch-Kicad-Simulation.git](https://github.com/satvikpandurangi/MOSFET-As-Switch-Kicad-Simulation.git)
+   git clone https://github.com/satvikpandurangi/MOSFET-As-Switch-Kicad-Simulation.git
    ```
-2. Open the `.kicad_pro` project file in the KiCad Project Manager.
+2. Open `MOSFET_As_Switch.kicad_pro` in the KiCad Project Manager.
 3. Open the Schematic Editor to view the circuit layout.
-4. Go to **Inspect > Simulator** in the top menu.
-5. Click the **Run/Stop Simulation** (Play) button.
-6. Probe the Gate and Drain nets on the schematic to view the resulting logic waveforms in the simulator window.
+4. Go to **Inspect > Simulator** in the menu bar.
+5. Click **Run/Stop Simulation** to execute the transient analysis.
+6. Probe the Gate and Drain nets to view the resulting switching waveforms.
 
----
+## Screenshots
 
-## 📂 Repository Contents
-* **`.kicad_pro`** - Main project file
-* **`.kicad_sch`** - The schematic wiring and SPICE directives
-* **`.kicad_pcb`** - Blank PCB layout file (ready for physical routing if desired)
+**Schematic:**
 
-> *Created for educational purposes and open-source hardware exploration.*
+![Schematic](images/schematic.png)
+
+**Simulation Output:**
+
+![Simulation Output](images/output.png)
+
