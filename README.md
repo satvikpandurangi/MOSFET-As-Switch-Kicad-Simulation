@@ -58,7 +58,7 @@ Built and simulated entirely in **KiCad EDA**, using its two core subsystems:
 ## 📂 Repository Structure
 
 ```
-.
+MOSFET-As-Switch-Kicad-Simulation
 ├── MOSFET_As_Switch.kicad_pro   # Main KiCad project file
 ├── MOSFET_As_Switch.kicad_sch   # Schematic and SPICE directives
 ├── MOSFET_As_Switch.kicad_pcb   # PCB layout file
@@ -89,7 +89,12 @@ The transient simulation confirmed the MOSFET acts as a reliable voltage-control
 
 ## 📸 Screenshots
 
+**Schematic:**
+
 ![Schematic](MOSFET_Schematic.png)
+
+**Simulation Output:**
+
 ![Simulation Output](MOSFET_Output.png)
 
 
