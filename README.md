@@ -73,9 +73,9 @@ The transient simulation confirms the MOSFET acts as a reliable voltage-controll
 
 **Schematic:**
 
-![Schematic](images/MOSFET_Schematic.png)
+![Schematic](MOSFET_Schematic.png)
 
 **Simulation Output:**
 
-![Simulation Output](images/MOSFET_Output.png)
+![Simulation Output](MOSFET_Output.png)
 
