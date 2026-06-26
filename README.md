@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔌 MOSFET as a Switch: KiCad SPICE Simulation
+# MOSFET as a Switch: KiCad SPICE Simulation
 
 ### Demonstrating N-Channel MOSFET switching behavior through KiCad transient SPICE analysis
 
